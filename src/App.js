@@ -21,11 +21,11 @@ function App(props) {
       return;
     }
     const getGamesAndPlayers = async () => {
-      let allGames = await axios.get(`/game/joined/${user.user_id}`);
+      let allGames = await axios.get(`/api/game/joined/${user.user_id}`);
       dispatch(setGamesRed([...allGames.data]));
-      let notifications = await axios.get(`/users/notifications/${user.user_id}`);
+      let notifications = await axios.get(`/api/users/notifications/${user.user_id}`);
       dispatch(setNotifications(notifications.data))
-      let dms = await axios.get(`/users/getdms/${user.user_id}`);
+      let dms = await axios.get(`/api/users/getdms/${user.user_id}`);
       dispatch(setDms(dms.data))
     };
     getGamesAndPlayers();
@@ -54,7 +54,7 @@ function App(props) {
       socket.on("friend added", (body) => {
         if (parseInt(body.friend_id) === parseInt(user.user_id) ||
         parseInt(body.user_id) === parseInt(user.user_id)){
-          axios.get("/auth/user").then(res=>{
+          axios.get("/api/auth/user").then(res=>{
             dispatch(setUser(res.data))
           }).catch(err=>{
             console.log(err)
@@ -64,7 +64,7 @@ function App(props) {
       socket.on("friend accept", (body) => {
         if (parseInt(body.friend_id) === parseInt(user.user_id) ||
         parseInt(body.user_id) === parseInt(user.user_id)){
-          axios.get("/auth/user").then(res=>{
+          axios.get("/api/auth/user").then(res=>{
             dispatch(setUser(res.data))
           }).catch(err=>{
             console.log(err)
@@ -90,8 +90,9 @@ function App(props) {
 
   const history = useHistory();
   useEffect(() => {
+    console.log('user check')
     axios
-      .get("/auth/user")
+      .get("/api/auth/user")
       .then((res) => {
         if (res.status === 200) {
           props.setUser(res.data);

@@ -49,7 +49,7 @@ const CreateGame = (props) => {
   };
   useEffect(() => {
     axios
-      .get("/users/friends/all")
+      .get("/api/users/friends/all")
       .then((res) => {
         let data = res.data.filter((el) => el.user_id !== user.user_id);
 
@@ -91,7 +91,7 @@ const CreateGame = (props) => {
     }
 
     axios
-      .post("/game/create", createdGame)
+      .post("/api/game/create", createdGame)
       .then((res) => {
         console.log(res);
         dispatch(addGamesRed(res.data));

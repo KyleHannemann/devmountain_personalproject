@@ -30,13 +30,13 @@ const User = (props) => {
 
   //edit own profile
   const [edit, setEdit] = useState(false);
-  useEffect(() => {}, [props.match.params.userId]);
   useEffect(() => {
     if (!user) {
-      return;
+      
+      return
     }
     axios
-      .get(`/users/get/users/friends/${props.match.params.userId}`)
+      .get(`/api/users/get/users/friends/${props.match.params.userId}`)
       .then((res) => {
         setThisUserFriends(res.data);
       })
@@ -80,18 +80,19 @@ const User = (props) => {
         }
       }
     }
-  }, [props.match.params.userId, user]);
+  }, [props.match.params.userId]);
 
   useEffect(() => {
     if (!user) {
+      props.history.push('/')
       return;
     }
     axios
-      .get(`/users/${userId}`)
+      .get(`/api/users/${userId}`)
       .then((res) => {
         setUserProfile(res.data);
         axios
-          .get(`/game/joined/${userId}`)
+          .get(`/api/game/joined/${userId}`)
           .then((res) => {
             setJoinedGames(res.data);
             console.log(res.data);
@@ -127,7 +128,7 @@ const User = (props) => {
     });
 
     axios
-      .post("/users/addFriend", { friendId: userProfile.user_id })
+      .post("/api/users/addFriend", { friendId: userProfile.user_id })
       .then((res) => {
         console.log(res.data);
       })
@@ -147,7 +148,7 @@ const User = (props) => {
       });
 
       axios
-        .put(`/users/addFriend/${e.target.value}`, {
+        .put(`/api/users/addFriend/${e.target.value}`, {
           friendId: props.match.params.userId,
         })
         .then((res) => {
@@ -161,7 +162,7 @@ const User = (props) => {
     } else if (e.target.value === "decline") {
       setFriends(false);
       axios
-        .put(`/users/addFriend/${e.target.value}`, {
+        .put(`/api/users/addFriend/${e.target.value}`, {
           friend_id: friendSql.friend_id,
           user_id: friendSql.user_id,
         })

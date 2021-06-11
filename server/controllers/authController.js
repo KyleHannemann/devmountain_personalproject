@@ -46,7 +46,7 @@ module.exports = {
         from: "hannemannkyle@gmail.com",
         to: email,
         subject: "Welcome to Pick-Up Sports!",
-        text: "Hi, Welcome to Pick-Up Sports where we connect people through sport.",
+        text: "Hi, Welcome to Pick-Up Sports where we connect people through sport. Thank you for joining the community.",
        };
       
        transporter.sendMail(mailOptions, function (err, data) {

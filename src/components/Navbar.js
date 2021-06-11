@@ -38,7 +38,7 @@ const Navbar = () => {
       for (let i = 0; i < dms.length; i++) {
         if (dmToState === parseInt(dms[i].user_id)) {
           axios
-            .put("/users/dms/seen", { user_id: dmToState, dm_to: user.user_id })
+            .put("/api/users/dms/seen", { user_id: dmToState, dm_to: user.user_id })
             .then(() => {})
             .catch((err) => {
               console.log(err);
@@ -52,7 +52,7 @@ const Navbar = () => {
     checkDmsForSeen();
   }, [dms, dmToState, user]);
   const logout = async () => {
-     await axios.get("/auth/logout").then((res) => {
+     await axios.get("/api/auth/logout").then((res) => {
       if (res.status === 200) {
         if (navDrop === false) {
           history.push("/");
@@ -121,7 +121,7 @@ const Navbar = () => {
     }
     dispatch(removeNotification(parseInt(e.target.value)));
     axios
-      .delete(`/users/notifications/delete/${e.target.value}`)
+      .delete(`/api/users/notifications/delete/${e.target.value}`)
       .then((res) => {
         console.log(res);
         if (notifications.length < 2){

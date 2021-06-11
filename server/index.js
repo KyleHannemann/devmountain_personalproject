@@ -138,7 +138,7 @@ io.on("connection", (socket) => {
           from: "test@gmail.com",
           to: user.email,
           subject: `${username} invited you to a game!`,
-          text: `${username} invited you to a game, view the details here!`,
+          text: `${username} invited you to a game! Login to your accout at www.pickupsports.org to view details!`,
         };
 
         transporter.sendMail(mailOptions, function (err, data) {
@@ -176,39 +176,39 @@ io.on("connection", (socket) => {
 });
 //endpoints
 //users
-app.get("/users/notifications/:userId", usersController.getNotifications);
+app.get("/api/users/notifications/:userId", usersController.getNotifications);
 app.delete(
-  "/users/notifications/delete/:notificationId",
+  "/api/users/notifications/delete/:notificationId",
   usersController.deleteNotification
 );
-app.get("/users/getdms/:userId", usersController.getDms)
-app.get("/users/:userId", usersController.getUser);
-app.post("/users/addFriend", usersController.addFriend);
-app.put("/users/addFriend/accept", usersController.acceptFriend);
-app.put("/users/addFriend/decline", usersController.declineFriend);
-app.get("/users/friends/all", usersController.getFriendsInfo);
-app.get("/users/get/all", usersController.getAllUsers);
+app.get("/api/users/getdms/:userId", usersController.getDms)
+app.get("/api/users/:userId", usersController.getUser);
+app.post("/api/users/addFriend", usersController.addFriend);
+app.put("/api/users/addFriend/accept", usersController.acceptFriend);
+app.put("/api/users/addFriend/decline", usersController.declineFriend);
+app.get("/api/users/friends/all", usersController.getFriendsInfo);
+app.get("/api/users/get/all", usersController.getAllUsers);
 app.get(
-  "/users/get/users/friends/:user_id",
+  "/api/users/get/users/friends/:user_id",
   usersController.getOtherUsersFriendsInfo
 );
-app.put("/users/dms/seen", usersController.seenDms)
+app.put("/api/users/dms/seen", usersController.seenDms)
 //game
-app.post("/game/create", gameController.createGame);
-app.get("/game/joined/:userId", gameController.getJoinedGames);
-app.get("/game/players/:gameId", gameController.getPlayers);
-app.get("/game/all/games", gameController.getAllGames);
-app.get("/game/:gameId", gameController.getGame);
-app.put("/game/join/:gameId", gameController.joinGame);
-app.put("/game/leave/:gameId", gameController.leaveGame);
-app.get("/game/comments/:gameId", gameController.getComments);
-app.post("/game/comment/add/:gameId", gameController.addComments);
+app.post("/api/game/create", gameController.createGame);
+app.get("/api/game/joined/:userId", gameController.getJoinedGames);
+app.get("/api/game/players/:gameId", gameController.getPlayers);
+app.get("/api/game/all/games", gameController.getAllGames);
+app.get("/api/game/:gameId", gameController.getGame);
+app.put("/api/game/join/:gameId", gameController.joinGame);
+app.put("/api/game/leave/:gameId", gameController.leaveGame);
+app.get("/api/game/comments/:gameId", gameController.getComments);
+app.post("/api/game/comment/add/:gameId", gameController.addComments);
 //auth
-app.post("/auth/register", authController.register);
-app.post("/auth/login", authController.login);
-app.get("/auth/user", authController.checkSession);
-app.get("/auth/logout", authController.logout);
-app.put("/auth/edit/profile", authController.edit);
+app.post("/api/auth/register", authController.register);
+app.post("/api/auth/login", authController.login);
+app.get("/api/auth/user", authController.checkSession);
+app.get("/api/auth/logout", authController.logout);
+app.put("/api/auth/edit/profile", authController.edit);
 
 app.use(express.static(__dirname + '/../build'))
 

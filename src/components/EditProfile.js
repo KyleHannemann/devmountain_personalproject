@@ -53,7 +53,7 @@ const EditProfile = (props) => {
     }
 
     axios
-      .put("/auth/edit/profile", {
+      .put("/api/auth/edit/profile", {
         username: newUsername,
         password: newPassword,
         email: newEmail,

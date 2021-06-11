@@ -22,7 +22,7 @@ const Friends = (props) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
-      .get("/users/friends/all")
+      .get("/api/users/friends/all")
       .then((res) => {
         let data = res.data.filter((el) => {
           if (el.user_id === user.user_id) {
@@ -44,7 +44,7 @@ const Friends = (props) => {
         setFriends(data);
         setSearchFriends(data);
         axios
-          .get("/users/get/all")
+          .get("/api/users/get/all")
           .then((res) => {
             
             setAllUsers(res.data);

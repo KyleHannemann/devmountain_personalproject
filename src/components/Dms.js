@@ -25,7 +25,7 @@ const Dms = (props) => {
     }
     if (dmTo !== null) {
       axios
-        .put("/users/dms/seen", { user_id: dmTo, dm_to: user.user_id })
+        .put("/api/users/dms/seen", { user_id: dmTo, dm_to: user.user_id })
         .then(() => {
           dispatch(dmSeen(user.user_id, dmTo));
         })
@@ -35,7 +35,7 @@ const Dms = (props) => {
     }
     setDmTo(dmToState);
     axios
-      .put("/users/dms/seen", { user_id: dmToState, dm_to: user.user_id })
+      .put("/api/users/dms/seen", { user_id: dmToState, dm_to: user.user_id })
       .then(() => {
         dispatch(dmSeen(user.user_id, dmToState));
       })
@@ -51,10 +51,11 @@ const Dms = (props) => {
   }, [dms]);
 
   const handleDm = (e) => {
+    e.preventDefault();
     if(!socket){
       return
     }
-    e.preventDefault();
+  
     if (message === "") {
       return alert("enter a message to send");
     }
@@ -183,7 +184,7 @@ const Dms = (props) => {
           onClick={async () => {
             if (dmTo !== null) {
               await axios
-                .put("/users/dms/seen", { user_id: dmTo, dm_to: user.user_id })
+                .put("/api/users/dms/seen", { user_id: dmTo, dm_to: user.user_id })
                 .then(() => {
                   dispatch(dmSeen(user.user_id, dmTo));
                 })

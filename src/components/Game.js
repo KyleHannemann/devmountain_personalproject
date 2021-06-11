@@ -29,10 +29,11 @@ const Game = (props) => {
   //get messages
   useEffect(() => {
     if (!user) {
+      props.history.push('/')
       return;
     }
     axios
-      .get(`/game/comments/${props.match.params.gameId}`)
+      .get(`/api/game/comments/${props.match.params.gameId}`)
       .then((res) => {
         setComments(res.data);
         console.log(res.data);
@@ -93,10 +94,10 @@ const Game = (props) => {
   }, [socket]);
   ////////////////
   const getGameAndPlayers = async () => {
-    let res = await axios.get(`/game/${props.match.params.gameId}`);
+    let res = await axios.get(`/api/game/${props.match.params.gameId}`);
     let thisGame = res.data[0];
 
-    let players = await axios.get(`/game/players/${props.match.params.gameId}`);
+    let players = await axios.get(`/api/game/players/${props.match.params.gameId}`);
 
     thisGame.players = players.data;
 
@@ -120,7 +121,7 @@ const Game = (props) => {
 
   const joinGame = () => {
     axios
-      .put(`/game/join/${props.match.params.gameId}`)
+      .put(`/api/game/join/${props.match.params.gameId}`)
       .then((res) => {
         if (res.status === 200) {
           dispatch(addGamesRed(game));
@@ -139,7 +140,7 @@ const Game = (props) => {
   };
   const leaveGame = () => {
     axios
-      .put(`/game/leave/${props.match.params.gameId}`)
+      .put(`/api/game/leave/${props.match.params.gameId}`)
       .then((res) => {
         dispatch(removeGameRed(props.match.params.gameId));
         alert("you have left this game");

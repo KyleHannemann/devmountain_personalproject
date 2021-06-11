@@ -26,11 +26,12 @@ const Login = (props) => {
   const [success, setSuccess] = useState(null);
 
   const handleDemo = (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
+    
 
     axios
-      .post("/auth/login", {
+      .post("/api/auth/login", {
         email: "demo_account@email.com",
         password: "demo",
       })
@@ -53,8 +54,9 @@ const Login = (props) => {
       });
   };
   const handleLogin = (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
+    
     if (email === "" || password === "") {
       setLoading(false)
       alert("please enter your email and password");
@@ -62,7 +64,7 @@ const Login = (props) => {
     }
 
     axios
-      .post("/auth/login", {
+      .post("/api/auth/login", {
         email: email,
         password: password,
       })
@@ -97,7 +99,7 @@ const Login = (props) => {
     }
 
     axios
-      .post("/auth/register", {
+      .post("/api/auth/register", {
         username: username,
         password: password,
         email: email,
